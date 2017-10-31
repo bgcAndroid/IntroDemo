@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">My Application</string>
+
+
+    <string-array name="course_name">
+        <item>ai </item>
+        <item>ar </item>
+        <item>bigdata</item>
+        <item>cloud</item>
+        <item>embedded</item>
+        <item>gaming</item>
+        <item>iot</item>
+        <item>mobiledev</item>
+        <item>robotics</item>
+        <item>webdev</item>
+    </string-array>
 </resources>
