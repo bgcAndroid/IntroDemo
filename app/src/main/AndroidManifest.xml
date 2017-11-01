@@ -19,16 +19,28 @@
             android:theme="@style/AppThemewithoutActionBar" />
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/AppThemewithoutActionBar">
+            android:theme="@style/AppThemewithoutActionBar" />
+        <activity android:name=".LangActivity" />
+        <activity android:name=".signUpActivity" />
+        <activity android:name=".ProjectGuideActivity" />
+        <activity android:name=".Main2Activity"></activity>
+        <activity
+            android:name=".Main3Activity"
+            android:label="@string/title_activity_main3"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".LangActivity" />
-        <activity android:name=".signUpActivity" />
-        <activity android:name=".ProjectGuideActivity"></activity>
     </application>
 
 </manifest>
