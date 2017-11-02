@@ -34,12 +34,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
+        final ImageAdapter imge = new ImageAdapter();
 //        holder.cname.setText(course_name[position]);
         holder.cdesp.setText(course_name[position]);
         holder.img.setImageResource(bg[position]);
+//        for (int i = 0; i <=bg.length ; i++) {
+//            new Thread(new Runnable() {
+//
+//                public void run() {
+//                    holder.img.setImageResource(bg[position]);
+//                }
+//            }).start();
+//        }
 
-    }
+            }
+
 
     @Override
     public int getItemCount() {

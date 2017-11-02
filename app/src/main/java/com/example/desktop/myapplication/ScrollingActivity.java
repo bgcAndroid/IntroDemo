@@ -1,11 +1,16 @@
 package com.example.desktop.myapplication;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.WindowManager;
 
 public class ScrollingActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -17,6 +22,12 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+/**
+ * Prevent from taking Screenshots
+ */
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
+
         setContentView(R.layout.activity_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -32,26 +43,27 @@ public class ScrollingActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        //get the bitmap of the drawable image we are using as background
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ai);
-//        //using palette, change the color of collapsing toolbar layout
-//        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-//                                          public void onGenerated(Palette palette) {
-//                                              int mutedColor = palette.getMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
-//                                              int mutedDarkColor = palette.getDarkMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
-//                                              int vibrantColor = palette.getVibrantColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
-//                                              collapsingToolbarLayout.setContentScrimColor(mutedColor);
-//                                              collapsingToolbarLayout.setStatusBarScrimColor(mutedDarkColor);
-//
-//                                          }
-//                                      });
+        //get the bitmap of the drawable image we are using as background
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ai);
+        //using palette, change the color of collapsing toolbar layout
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                                          public void onGenerated(Palette palette) {
+                                              int mutedColor = palette.getMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
+                                              int mutedDarkColor = palette.getDarkMutedColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                                              int vibrantColor = palette.getVibrantColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
+                                              collapsingToolbarLayout.setContentScrimColor(mutedColor);
+                                              collapsingToolbarLayout.setStatusBarScrimColor(mutedDarkColor);
+
+                                          }
+                                      });
 
 
-            recyclerView = findViewById(R.id.recycle);
-            adapter = new RecyclerAdapter(course,desp,img,getApplicationContext());
-            layoutManager = new LinearLayoutManager(ScrollingActivity.this);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setHasFixedSize(true);
+        adapter = new RecyclerAdapter(course,desp,img,getApplicationContext());
+        recyclerView = findViewById(R.id.recycle);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(ScrollingActivity.this);
+        layoutManager.canScrollVertically();
+        recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
     }
 
