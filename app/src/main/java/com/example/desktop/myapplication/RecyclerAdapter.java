@@ -10,20 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
 /**
  * Created by Desktop on 10/27/2017.
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
-
-    String [] course_name,cousrse_desp;
-    int [] bg;
-    Context context;
-    public  RecyclerAdapter (String[] course_name, String[] cousrse_desp, int [] bg,Context context) {
-        this.course_name = course_name;
-        this.cousrse_desp = cousrse_desp;
-        this.bg=bg;
-        this.context=context;
+    private Context context;
+    private List<ImageAdapter> albumList;
+    public  RecyclerAdapter (Context context, List<ImageAdapter> albumList) {
+        this.context = context;
+        this.albumList = albumList;
     }
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,10 +35,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
-        final ImageAdapter imge = new ImageAdapter();
-//        holder.cname.setText(course_name[position]);
-        holder.cdesp.setText(course_name[position]);
-        holder.img.setImageResource(bg[position]);
+        ImageAdapter album = albumList.get(position);
+        holder.cdesp.setText(album.getCourse_name());
+        Log.i("name", "onBindViewHolder: "+ album.getCourse_name());
+               Glide.with(context).load(album.getImages()).into(holder.img);
+//        holder.img.setImageResource(album.getImages());
+//        holder.img.setImageResource(bg[position]);
 //        for (int i = 0; i <=bg.length ; i++) {
 //            new Thread(new Runnable() {
 //
@@ -53,7 +55,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public int getItemCount() {
-        return course_name.length;
+        Log.i("ad", "getItemCount: " + albumList.size());
+        return albumList.size();
+
     }
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -82,4 +86,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         }
     }
-}
+
+ }

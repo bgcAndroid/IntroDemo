@@ -2,7 +2,6 @@ package com.example.desktop.myapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_layouts);
         recyclerView = findViewById(R.id.recycle);
-        adapter = new RecyclerAdapter(course,desp,img,getApplicationContext());
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+//        adapter = new RecyclerAdapter(getApplicationContext(),albumList);
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setAdapter(adapter);
 //        final ViewFlipper MyViewFlipper = findViewById(R.id.viewflipper);
 //        MyViewFlipper.setAutoStart(true);
 

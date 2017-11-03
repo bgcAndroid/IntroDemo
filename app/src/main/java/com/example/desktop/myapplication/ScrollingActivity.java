@@ -10,23 +10,27 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.WindowManager;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity {
+    private List<ImageAdapter> albumList;
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapter;
     private  RecyclerView.LayoutManager layoutManager;
     public   String [] course ={"AI &amp EI","Augmented Reality","Big Data","Cloud Computing","Embedded System","Gaming Application Development","IoT","Mobile Application Development","Robotics","Web Development"};
     public String [] desp ={"desp","desp2","desp3","desp4"};
-    int[] img = {R.drawable.ai, R.drawable.ar, R.drawable.big, R.drawable.cloud,R.drawable.embedded,R.drawable.gaming,R.drawable.iot,R.drawable.mobiledev,R.drawable.robo,R.drawable.webdev};
+    int[] img = new int[]{R.drawable.ai, R.drawable.ar, R.drawable.big, R.drawable.cloud,R.drawable.embedded,R.drawable.gaming,R.drawable.iot,R.drawable.mobiledev,R.drawable.robo,R.drawable.webdev};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 /**
  * Prevent from taking Screenshots
  */
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                WindowManager.LayoutParams.FLAG_SECURE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+//                WindowManager.LayoutParams.FLAG_SECURE);
 
         setContentView(R.layout.activity_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,15 +60,35 @@ public class ScrollingActivity extends AppCompatActivity {
 
                                           }
                                       });
-
-
-        adapter = new RecyclerAdapter(course,desp,img,getApplicationContext());
         recyclerView = findViewById(R.id.recycle);
-        recyclerView.setHasFixedSize(true);
+        albumList = new ArrayList<>();
+        adapter = new RecyclerAdapter(getApplicationContext(),albumList);
+
+
         layoutManager = new LinearLayoutManager(ScrollingActivity.this);
-        layoutManager.canScrollVertically();
-        recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(adapter);
+        prepareAlbums();
+    }
+
+    private void prepareAlbums() {
+        ImageAdapter a = new ImageAdapter("AI &amp EI", img[0]);
+        albumList.add(a);
+        a = new ImageAdapter("Augmented Reality", img[1]);
+        albumList.add(a);
+        a = new ImageAdapter("Big Data", img[2]);
+        albumList.add(a);a = new ImageAdapter("Cloud Computing", img[3]);
+        albumList.add(a);a = new ImageAdapter("Embedded System", img[4]);
+        albumList.add(a);a = new ImageAdapter("Gaming Application Development", img[5]);
+        albumList.add(a);a = new ImageAdapter("IoT", img[6]);
+        albumList.add(a);a = new ImageAdapter("Mobile Application Development", img[7]);
+        albumList.add(a);a = new ImageAdapter("Robotics", img[8]);
+        albumList.add(a);a = new ImageAdapter("Web Development", img[9]);
+        albumList.add(a);
+        adapter.notifyDataSetChanged();
+        Log.i("length", "size"+albumList.size());
+
     }
 
 }
